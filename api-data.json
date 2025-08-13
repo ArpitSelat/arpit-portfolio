@@ -27,7 +27,7 @@
     "yearsExperience": 3.1,
     "approxExperience": 3,
     "majorProjects": 3,
-    "certifications": 5,
+    "certifications": 4,
     "clientSatisfaction": 100
   },
   "skillsOverview": {
@@ -375,19 +375,9 @@
       "name": "Microsoft .NET Framework 3.5, ASP.NET Application Development (MCTS)",
       "issuer": "Microsoft",
       "date": "2022",
-      "credentialUrl": "#",
+      "credentialUrl": "https://drive.google.com/file/d/1Q-KbcjtoGO-W2AizjJ5iBDLYsn1eAtH4/view?usp=sharing",
       "icon": "fas fa-certificate",
       "color": "warning",
-      "buttonText": "View Certificate"
-    },
-    {
-      "id": 5,
-      "name": "Azure Fundamentals",
-      "issuer": "Microsoft",
-      "date": "2022",
-      "credentialUrl": "#",
-      "icon": "fas fa-certificate",
-      "color": "secondary",
       "buttonText": "View Certificate"
     }
   ],
