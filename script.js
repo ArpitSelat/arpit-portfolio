@@ -1,7 +1,22 @@
 // Custom JavaScript for Arpit Kumar Selat Portfolio
 
-document.addEventListener('DOMContentLoaded', function() {
-    // Initialize all functionality
+document.addEventListener('DOMContentLoaded', async function() {
+    // Wait for API data to load first
+    try {
+        // Wait a bit for the data loader to initialize
+        await new Promise(resolve => setTimeout(resolve, 100));
+        
+        // Check if data loader is available and wait for it to complete
+        if (window.portfolioDataLoader) {
+            console.log('Waiting for portfolio data to load...');
+            // The data loader initializes automatically, so we just wait a bit more
+            await new Promise(resolve => setTimeout(resolve, 500));
+        }
+    } catch (error) {
+        console.log('Proceeding without API data:', error);
+    }
+    
+    // Initialize all functionality after data is loaded
     initSmoothScrolling();
     initNavbarScrollEffect();
     initAnimationsOnScroll();
@@ -9,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initContactForm();
     // initTypingEffect(); // Disabled to prevent HTML tag display issues
     initParticleBackground();
+    
+    console.log('Portfolio JavaScript initialization complete');
 });
 
 // Smooth scrolling for navigation links

@@ -1,0 +1,444 @@
+{
+  "personalInfo": {
+    "name": "Arpit Kumar Selat",
+    "title": "Junior Software Engineer",
+    "location": "Indore, Madhya Pradesh, India",
+    "email": "arpitselat@gmail.com",
+    "phone": "+91 7999564548",
+    "experience": "3.1",
+    "summary": "Junior Software Engineer with over 3 years of experience building scalable and performance-driven web applications using ASP.NET MVC, .NET Core, .NET 8, and SQL Server. Proficient in API integration, clean UI development, performance optimization, and Microsoft Teams integration. Currently working at Cognizant leading the development of Manager Hub platform."
+  },
+  "aboutSection": {
+    "sectionTitle": "About Me",
+    "sectionSubtitle": "Passionate about creating innovative solutions",
+    "professionalSummary": {
+      "title": "Professional Summary",
+      "paragraph1": "Junior Software Engineer with over 3.5 years of experience building scalable and performance-driven web applications using ASP.NET MVC, .NET Core, .NET 8, and SQL Server. Proficient in API integration, clean UI development, performance optimization, and Microsoft Teams integration. Currently working at Cognizant leading the development of Manager Hub platform.",
+      "paragraph2": "Hands-on experience with Microsoft Teams integration, Razor Pages, and Azure DevOps pipelines. Currently leading the development of the Manager Hub platform at Cognizant, delivering robust, secure, and maintainable enterprise solutions."
+    },
+    "contactDetails": {
+      "location": "Indore, Madhya Pradesh, India",
+      "experience": "3.1 Years",
+      "email": "arpitselat@gmail.com",
+      "phone": "+91 7999564548"
+    }
+  },
+  "statistics": {
+    "yearsExperience": 3.1,
+    "approxExperience": 3,
+    "majorProjects": 3,
+    "certifications": 5,
+    "clientSatisfaction": 100
+  },
+  "skillsOverview": {
+    "backendTechnologies": 11,
+    "frontendFrameworks": 8,
+    "databases": 4,
+    "cloudPlatforms": 10,
+    "aiMlTechnologies": 3,
+    "generalSkills": 1
+  },
+  "technicalSkills": {
+    "backend": [
+      {
+        "name": "C#",
+        "icon": "fas fa-code",
+        "level": "Expert",
+        "color": "primary"
+      },
+      {
+        "name": ".NET Core",
+        "icon": "fab fa-microsoft",
+        "level": "Expert",
+        "color": "success"
+      },
+      {
+        "name": ".NET 8",
+        "icon": "fas fa-cogs",
+        "level": "Expert",
+        "color": "info"
+      },
+      {
+        "name": "ASP.NET MVC",
+        "icon": "fas fa-layer-group",
+        "level": "Expert",
+        "color": "warning"
+      },
+      {
+        "name": "Web API",
+        "icon": "fas fa-plug",
+        "level": "Expert",
+        "color": "danger"
+      },
+      {
+        "name": "Entity Framework",
+        "icon": "fas fa-database",
+        "level": "Advanced",
+        "color": "secondary"
+      },
+      {
+        "name": ".NET Framework",
+        "icon": "fab fa-microsoft",
+        "level": "Expert",
+        "color": "primary"
+      },
+      {
+        "name": "Entity Framework Core",
+        "icon": "fas fa-database",
+        "level": "Advanced",
+        "color": "info"
+      },
+      {
+        "name": "RESTful API Development",
+        "icon": "fas fa-exchange-alt",
+        "level": "Expert",
+        "color": "success"
+      },
+      {
+        "name": "Performance Optimization",
+        "icon": "fas fa-tachometer-alt",
+        "level": "Advanced",
+        "color": "warning"
+      },
+      {
+        "name": "Dependency Injection",
+        "icon": "fas fa-puzzle-piece",
+        "level": "Advanced",
+        "color": "danger"
+      }
+    ],
+    "frontend": [
+      {
+        "name": "HTML5",
+        "icon": "fab fa-html5",
+        "level": "Expert",
+        "color": "danger"
+      },
+      {
+        "name": "CSS3",
+        "icon": "fab fa-css3-alt",
+        "level": "Expert",
+        "color": "info"
+      },
+      {
+        "name": "JavaScript",
+        "icon": "fab fa-js-square",
+        "level": "Advanced",
+        "color": "warning"
+      },
+      {
+        "name": "Bootstrap",
+        "icon": "fab fa-bootstrap",
+        "level": "Expert",
+        "color": "primary"
+      },
+      {
+        "name": "jQuery",
+        "icon": "fab fa-js",
+        "level": "Advanced",
+        "color": "success"
+      },
+      {
+        "name": "AJAX",
+        "icon": "fas fa-sync-alt",
+        "level": "Advanced",
+        "color": "secondary"
+      },
+      {
+        "name": "Microsoft Teams Integration",
+        "icon": "fab fa-microsoft",
+        "level": "Advanced",
+        "color": "info"
+      },
+      {
+        "name": "UI/UX Design",
+        "icon": "fas fa-paint-brush",
+        "level": "Advanced",
+        "color": "warning"
+      }
+    ],
+    "databases": [
+      {
+        "name": "Microsoft SQL Server",
+        "icon": "fas fa-database",
+        "level": "Expert",
+        "color": "primary"
+      },
+      {
+        "name": "Database Optimization",
+        "icon": "fas fa-chart-line",
+        "level": "Advanced",
+        "color": "success"
+      },
+      {
+        "name": "Redis Caching",
+        "icon": "fas fa-memory",
+        "level": "Advanced",
+        "color": "danger"
+      },
+      {
+        "name": "Query Optimization",
+        "icon": "fas fa-search",
+        "level": "Advanced",
+        "color": "info"
+      }
+    ],
+    "cloudDevOps": [
+      {
+        "name": "Azure DevOps",
+        "icon": "fab fa-microsoft",
+        "level": "Advanced",
+        "color": "info"
+      },
+      {
+        "name": "CI/CD Pipelines",
+        "icon": "fas fa-infinity",
+        "level": "Advanced",
+        "color": "warning"
+      },
+      {
+        "name": "Microservices",
+        "icon": "fas fa-cubes",
+        "level": "Intermediate",
+        "color": "success"
+      },
+      {
+        "name": "Agile & DevOps",
+        "icon": "fas fa-users-cog",
+        "level": "Advanced",
+        "color": "secondary"
+      },
+      {
+        "name": "Microsoft Azure",
+        "icon": "fab fa-microsoft",
+        "level": "Advanced",
+        "color": "primary"
+      },
+      {
+        "name": "Cloud Computing",
+        "icon": "fas fa-cloud",
+        "level": "Advanced",
+        "color": "info"
+      },
+      {
+        "name": "Google Cloud Platform (GCP)",
+        "icon": "fab fa-google",
+        "level": "Intermediate",
+        "color": "warning"
+      },
+      {
+        "name": "Digital Transformation",
+        "icon": "fas fa-digital-tachograph",
+        "level": "Intermediate",
+        "color": "success"
+      },
+      {
+        "name": "Cloud Infrastructure",
+        "icon": "fas fa-server",
+        "level": "Advanced",
+        "color": "danger"
+      },
+      {
+        "name": "IT Strategy",
+        "icon": "fas fa-chess",
+        "level": "Intermediate",
+        "color": "secondary"
+      }
+    ],
+    "aiMl": [
+      {
+        "name": "Artificial Intelligence (AI)",
+        "icon": "fas fa-brain",
+        "level": "Intermediate",
+        "color": "primary"
+      },
+      {
+        "name": "Natural Language Processing (NLP)",
+        "icon": "fas fa-language",
+        "level": "Intermediate",
+        "color": "info"
+      },
+      {
+        "name": "Azure Cognitive Services",
+        "icon": "fab fa-microsoft",
+        "level": "Intermediate",
+        "color": "success"
+      }
+    ],
+    "general": [
+      {
+        "name": "Software Development",
+        "icon": "fas fa-laptop-code",
+        "level": "Expert",
+        "color": "primary"
+      }
+    ]
+  },
+  "experience": [
+    {
+      "id": 1,
+      "position": "Junior Software Engineer",
+      "company": "Cognizant",
+      "duration": "February 2024 - Present",
+      "location": "Remote",
+      "type": "Full-time",
+      "responsibilities": [
+        "Leading full-stack development of the Manager Hub platform using ASP.NET MVC, C#, and SQL Server",
+        "Developed and integrated the Activity Centre task module with Microsoft Teams using .NET 8 and Razor Pages",
+        "Upgraded UI and backend flows in One Cognizant, improving user experience and data efficiency",
+        "Implemented secure RESTful APIs using .NET 8, Razor Pages, and Azure Identity for authentication and authorization",
+        "Improved performance using Redis caching and followed layered architecture for maintainability"
+      ],
+      "technologies": ["ASP.NET MVC", "C#", "SQL Server", ".NET 8", "Razor Pages", "Microsoft Teams API", "Azure Identity", "Redis"],
+      "achievements": [
+        "Successfully integrated Microsoft Teams with Activity Centre module",
+        "Improved application performance through Redis caching implementation",
+        "Enhanced user experience in One Cognizant platform",
+        "Implemented secure authentication and authorization systems"
+      ]
+    },
+    {
+      "id": 2,
+      "position": "Software Engineer Trainee",
+      "company": "Cognizant",
+      "duration": "February 2023 - January 2024",
+      "location": "Remote",
+      "type": "Full-time",
+      "responsibilities": [
+        "Built key backend features for DP Digital Task Management, an internal task management tool",
+        "Gained hands-on experience with CI/CD pipelines and automated deployments via Azure DevOps",
+        "Practiced DevOps workflows including version control, builds, and deployments via Azure DevOps",
+        "Collaborated with cross-functional Agile teams, contributing to sprint planning, reviews, and daily standups"
+      ],
+      "technologies": ["Azure DevOps", "CI/CD", "DevOps", "Agile", "Version Control"],
+      "achievements": [
+        "Successfully implemented CI/CD pipelines for automated deployments",
+        "Contributed to internal task management tool development",
+        "Gained expertise in DevOps workflows and practices",
+        "Effective collaboration in Agile development environment"
+      ]
+    },
+    {
+      "id": 3,
+      "position": "Full Stack Engineer",
+      "company": "Cognizant",
+      "duration": "February 2022 - August 2022",
+      "location": "Remote",
+      "type": "Full-time",
+      "responsibilities": [
+        "Developed a Food Delivery System with real-time tracking and secure payment integration",
+        "Built and optimized RESTful APIs using ASP.NET Core and C# for smooth, secure transactions",
+        "Improved SQL performance by 25% and supported UI using HTML, CSS, and JavaScript"
+      ],
+      "technologies": ["C#", "ASP.NET Web API", "CSS3", "Microsoft SQL Server", "HTML5", "ASP.NET Core", "JavaScript"],
+      "achievements": [
+        "Successfully delivered Food Delivery System with real-time tracking",
+        "Achieved 25% improvement in SQL performance",
+        "Implemented secure payment integration system",
+        "Built responsive UI with modern web technologies"
+      ]
+    }
+  ],
+  "certifications": [
+    {
+      "id": 1,
+      "name": ".NET Core Certification",
+      "issuer": "Cognizant",
+      "date": "2023",
+      "credentialUrl": "https://drive.google.com/file/d/1QmrX6Mp3RwBMFXpByFDGxtQ4Qw2BmdUO/view?usp=sharing",
+      "icon": "fas fa-certificate",
+      "color": "primary",
+      "buttonText": "View Certificate"
+    },
+    {
+      "id": 2,
+      "name": "Google Cloud Digital Leader",
+      "issuer": "Google",
+      "date": "2023",
+      "credentialUrl": "https://www.credly.com/badges/fde84a3d-4e70-416b-82db-ded7a736907c/linked_in_profile",
+      "icon": "fas fa-certificate",
+      "color": "success",
+      "buttonText": "View Badge"
+    },
+    {
+      "id": 3,
+      "name": "Microsoft Certified: Azure AI Fundamentals",
+      "issuer": "Microsoft",
+      "date": "2023",
+      "credentialUrl": "https://learn.microsoft.com/api/credentials/share/en-us/ArpitKumarSelat-6999/FB362CF915D0FD1B?sharingId",
+      "icon": "fas fa-certificate",
+      "color": "info",
+      "buttonText": "View Credential"
+    },
+    {
+      "id": 4,
+      "name": "Microsoft .NET Framework 3.5, ASP.NET Application Development (MCTS)",
+      "issuer": "Microsoft",
+      "date": "2022",
+      "credentialUrl": "#",
+      "icon": "fas fa-certificate",
+      "color": "warning",
+      "buttonText": "View Certificate"
+    },
+    {
+      "id": 5,
+      "name": "Azure Fundamentals",
+      "issuer": "Microsoft",
+      "date": "2022",
+      "credentialUrl": "#",
+      "icon": "fas fa-certificate",
+      "color": "secondary",
+      "buttonText": "View Certificate"
+    }
+  ],
+  "projects": [
+    {
+      "id": 1,
+      "name": "Activity Center – Task Management Web App",
+      "description": "Worked on integrating an internal task management solution with Microsoft Teams, which was my primary responsibility—enabling users to manage tasks and receive real-time updates directly within the Teams interface. Developed and deployed this solution from scratch as part of the OneCognizant platform. The project focused on building an Activity Center module using ASP.NET Core Razor Pages and .NET 8. In addition to Teams integration, I was responsible for implementing key backend features such as task management, user activity tracking, and database logging. I designed and consumed secure RESTful APIs using Azure Identity for authentication. On the frontend, I built reusable UI components with Razor partial views and Knockout.js to enable dynamic user interactions. The solution adhered to clean coding practices including layered architecture, centralized exception handling, and dependency injection to ensure scalability and maintainability.",
+      "technologies": ["Microsoft Teams", "ASP.NET Core/MVC", "ASP.NET Razor", "RESTful WebServices", "Dependency Injection", "Azure DevOps & CI/CD Pipelines", "SQL Server & Database Optimization"],
+      "features": [
+        "Microsoft Teams integration",
+        "Task management and tracking",
+        "Real-time updates within Teams interface",
+        "User activity tracking and database logging",
+        "Secure RESTful APIs with Azure Identity",
+        "Reusable UI components with Razor partial views",
+        "Dynamic interactions with Knockout.js",
+        "Layered architecture and centralized exception handling"
+      ],
+      "status": "Completed"
+    },
+    {
+      "id": 2,
+      "name": "🖥️ One Cognizant Redesign",
+      "description": "Enhanced the One Cognizant platform by implementing UI/UX improvements, backend logic optimizations, and API integrations. Improved user experience and system responsiveness by redesigning the frontend using Bootstrap, jQuery, and HTML5. Optimized backend performance through C# and SQL tuning, reducing latency by 25%.",
+      "technologies": ["UI/UX Design (Bootstrap, HTML, CSS, JavaScript)", "ASP.NET MVC & C#", "API Development & Integration", "SQL Server Optimization", "Agile & Performance Tuning"],
+      "features": [
+        "UI/UX improvements and redesign",
+        "Frontend redesign with Bootstrap, jQuery, HTML5",
+        "Backend logic optimizations",
+        "API integrations",
+        "25% latency reduction through performance tuning",
+        "Enhanced user experience and system responsiveness"
+      ],
+      "status": "Completed"
+    },
+    {
+      "id": 3,
+      "name": "🚀 Manager Hub Development",
+      "description": "Led the full-stack development of an internal Manager Hub platform at Cognizant, ensuring scalability, performance optimization, and seamless API integrations. Designed and implemented efficient backend logic using ASP.NET MVC, C#, and SQL Server, reducing processing time by 30%. Improved system efficiency by 40% through database query optimization and API performance tuning.",
+      "technologies": ["ASP.NET Core/MVC", "C# & Entity Framework", "SQL Server & Database Optimization", "Azure DevOps & CI/CD Pipelines", "RESTful APIs & Microservices"],
+      "features": [
+        "Full-stack platform development",
+        "Scalability and performance optimization",
+        "Seamless API integrations",
+        "30% reduction in processing time",
+        "40% improvement in system efficiency",
+        "Database query optimization",
+        "API performance tuning"
+      ],
+      "status": "Active Development"
+    }
+  ]
+}
