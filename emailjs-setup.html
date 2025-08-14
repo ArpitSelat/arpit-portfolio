@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EmailJS Setup Alternative</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+        .code { background: #f4f4f4; padding: 10px; border-radius: 5px; }
+        .step { margin: 20px 0; padding: 15px; border-left: 4px solid #007bff; }
+    </style>
+</head>
+<body>
+    <h1>Easy Email Setup with EmailJS (No Server Required)</h1>
+    
+    <div class="step">
+        <h3>Step 1: Sign up for EmailJS</h3>
+        <p>Go to <a href="https://www.emailjs.com/" target="_blank">EmailJS.com</a> and create a free account</p>
+    </div>
+    
+    <div class="step">
+        <h3>Step 2: Add Email Service</h3>
+        <p>In EmailJS dashboard, add Gmail as your email service</p>
+    </div>
+    
+    <div class="step">
+        <h3>Step 3: Create Email Template</h3>
+        <p>Create a template with these variables:</p>
+        <div class="code">
+            From: {{from_name}} ({{from_email}})<br>
+            Subject: {{subject}}<br>
+            Message: {{message}}
+        </div>
+    </div>
+    
+    <div class="step">
+        <h3>Step 4: Get Your IDs</h3>
+        <p>Copy your Service ID, Template ID, and Public Key from EmailJS dashboard</p>
+    </div>
+    
+    <div class="step">
+        <h3>Step 5: Use This Code</h3>
+        <p>Replace the contact form JavaScript with this EmailJS version:</p>
+        <div class="code">
+// Add EmailJS script to your HTML head:<br>
+&lt;script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"&gt;&lt;/script&gt;<br><br>
+
+// Initialize EmailJS<br>
+emailjs.init("YOUR_PUBLIC_KEY");<br><br>
+
+// Contact form function<br>
+function initContactForm() {<br>
+&nbsp;&nbsp;const contactForm = document.getElementById('contactForm');<br>
+&nbsp;&nbsp;if (contactForm) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;contactForm.addEventListener('submit', function(e) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;e.preventDefault();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;emailjs.sendForm('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', this)<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.then(() => alert('Message sent successfully!'))<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;.catch(() => alert('Failed to send message'));<br>
+&nbsp;&nbsp;&nbsp;&nbsp;});<br>
+&nbsp;&nbsp;}<br>
+}
+        </div>
+    </div>
+    
+    <p><strong>Benefits of EmailJS:</strong></p>
+    <ul>
+        <li>No server-side code needed</li>
+        <li>No app passwords required</li>
+        <li>Works with static hosting</li>
+        <li>Free tier available</li>
+    </ul>
+</body>
+</html>

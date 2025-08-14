@@ -1,5 +1,75 @@
 // Custom JavaScript for Arpit Kumar Selat Portfolio
 
+// Collapsible Sections Functionality
+function toggleSection(sectionName) {
+    const content = document.getElementById(sectionName + '-content');
+    const header = event.target.closest('.section-header');
+    
+    // Close all other sections first
+    const allSections = document.querySelectorAll('.section-content');
+    const allHeaders = document.querySelectorAll('.section-header');
+    
+    allSections.forEach(section => {
+        if (section !== content) {
+            section.classList.remove('active');
+            section.style.maxHeight = '0px';
+        }
+    });
+    
+    allHeaders.forEach(headerEl => {
+        if (headerEl !== header) {
+            headerEl.classList.remove('active');
+        }
+    });
+    
+    // Toggle the clicked section
+    if (content.classList.contains('active')) {
+        content.classList.remove('active');
+        content.style.maxHeight = '0px';
+        header.classList.remove('active');
+    } else {
+        content.classList.add('active');
+        content.style.maxHeight = content.scrollHeight + 'px';
+        header.classList.add('active');
+        
+        // Auto-adjust height after transition
+        setTimeout(() => {
+            if (content.classList.contains('active')) {
+                content.style.maxHeight = 'none';
+            }
+        }, 500);
+    }
+    
+    // Scroll to the section header after a short delay
+    setTimeout(() => {
+        header.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'start' 
+        });
+    }, 100);
+}
+
+// Initialize collapsible sections
+function initCollapsibleSections() {
+    // Ensure the home section is open by default
+    const homeContent = document.getElementById('home-content');
+    const homeHeader = document.querySelector('.section-header.active');
+    
+    if (homeContent && homeHeader) {
+        homeContent.style.maxHeight = 'none';
+    }
+    
+    // Handle responsive resizing
+    window.addEventListener('resize', () => {
+        const activeSections = document.querySelectorAll('.section-content.active');
+        activeSections.forEach(section => {
+            if (section.style.maxHeight !== '0px') {
+                section.style.maxHeight = 'none';
+            }
+        });
+    });
+}
+
 document.addEventListener('DOMContentLoaded', async function() {
     // Wait for API data to load first
     try {
@@ -214,9 +284,38 @@ function initContactForm() {
             });
             
             if (isValid) {
-                // Show success message
-                showNotification('Thank you for your message! I\'ll get back to you soon.', 'success');
-                contactForm.reset();
+                // Show loading state
+                const submitBtn = contactForm.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
+                submitBtn.disabled = true;
+                
+                // Send email
+                fetch('/send-email', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/x-www-form-urlencoded',
+                    },
+                    body: new URLSearchParams(formData)
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        showNotification(data.message, 'success');
+                        contactForm.reset();
+                    } else {
+                        showNotification(data.message, 'error');
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    showNotification('Failed to send message. Please try again or contact directly at arpitselat@gmail.com', 'error');
+                })
+                .finally(() => {
+                    // Restore button state
+                    submitBtn.innerHTML = originalText;
+                    submitBtn.disabled = false;
+                });
             } else {
                 showNotification('Please fill in all required fields.', 'error');
             }

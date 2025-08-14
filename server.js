@@ -2,8 +2,27 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 const url = require('url');
+const querystring = require('querystring');
+const nodemailer = require('nodemailer');
 
 const port = process.env.PORT || 8000;
+
+// Email configuration - UPDATE THESE WITH YOUR CREDENTIALS
+const emailConfig = {
+  service: 'gmail',
+  auth: {
+    user: 'arpitselat@gmail.com', // Your Gmail address
+    pass: 'your-app-password'     // Generate this from Google Account Settings
+  }
+};
+
+// Create nodemailer transporter
+let transporter = null;
+try {
+  transporter = nodemailer.createTransport(emailConfig);
+} catch (error) {
+  console.log('Email transporter not configured. Messages will be saved to file.');
+}
 
 const mimeTypes = {
   '.html': 'text/html',
@@ -33,6 +52,105 @@ const server = http.createServer((req, res) => {
 
   const parsedUrl = url.parse(req.url);
   let pathname = parsedUrl.pathname;
+
+  // Handle contact form submission
+  if (req.method === 'POST' && pathname === '/send-email') {
+    let body = '';
+    
+    req.on('data', chunk => {
+      body += chunk.toString();
+    });
+    
+    req.on('end', () => {
+      try {
+        const formData = querystring.parse(body);
+        
+        // Email options
+        const mailOptions = {
+          from: formData.email,
+          to: 'arpitselat@gmail.com',
+          subject: `Portfolio Contact: ${formData.subject}`,
+          html: `
+            <h3>New message from your portfolio website</h3>
+            <p><strong>Name:</strong> ${formData.name}</p>
+            <p><strong>Email:</strong> ${formData.email}</p>
+            <p><strong>Subject:</strong> ${formData.subject}</p>
+            <p><strong>Message:</strong></p>
+            <p>${formData.message.replace(/\n/g, '<br>')}</p>
+            <hr>
+            <p><small>Sent from your portfolio contact form</small></p>
+          `
+        };
+        
+        // Save message to file (backup method)
+        const messageData = {
+          timestamp: new Date().toISOString(),
+          name: formData.name,
+          email: formData.email,
+          subject: formData.subject,
+          message: formData.message
+        };
+        
+        const messagesFile = path.join(__dirname, 'contact-messages.json');
+        let messages = [];
+        
+        // Read existing messages
+        try {
+          if (fs.existsSync(messagesFile)) {
+            const data = fs.readFileSync(messagesFile, 'utf8');
+            messages = JSON.parse(data);
+          }
+        } catch (error) {
+          console.log('Creating new messages file');
+        }
+        
+        // Add new message
+        messages.push(messageData);
+        
+        // Save to file
+        fs.writeFileSync(messagesFile, JSON.stringify(messages, null, 2));
+        console.log('Message saved to contact-messages.json');
+        
+        // Try to send email if configured
+        if (transporter && emailConfig.auth.pass !== 'your-app-password') {
+          transporter.sendMail(mailOptions, (error, info) => {
+            if (error) {
+              console.error('Email sending failed:', error);
+              res.writeHead(200, { 'Content-Type': 'application/json' });
+              res.end(JSON.stringify({ 
+                success: true, 
+                message: 'Thank you for your message! It has been saved and I will get back to you soon. (Email delivery pending setup)' 
+              }));
+            } else {
+              console.log('Email sent successfully:', info.response);
+              res.writeHead(200, { 'Content-Type': 'application/json' });
+              res.end(JSON.stringify({ 
+                success: true, 
+                message: 'Thank you for your message! I will get back to you soon.' 
+              }));
+            }
+          });
+        } else {
+          // Email not configured, but message is saved
+          res.writeHead(200, { 'Content-Type': 'application/json' });
+          res.end(JSON.stringify({ 
+            success: true, 
+            message: 'Thank you for your message! It has been received and saved. I will get back to you soon.' 
+          }));
+        }
+        
+      } catch (error) {
+        console.error('Form processing error:', error);
+        res.writeHead(400, { 'Content-Type': 'application/json' });
+        res.end(JSON.stringify({ 
+          success: false, 
+          message: 'Invalid form data' 
+        }));
+      }
+    });
+    
+    return;
+  }
 
   // Default to index.html for root path
   if (pathname === '/') {
