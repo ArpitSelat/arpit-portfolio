@@ -1,8 +1,9 @@
 # Dependencies
 node_modules/
 
-# Contact form messages (sensitive data)
+# Contact form messages and visitor data (sensitive data)
 contact-messages.json
+visitors.json
 
 # Environment variables
 .env

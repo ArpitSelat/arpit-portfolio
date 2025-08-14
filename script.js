@@ -94,6 +94,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     initContactForm();
     // initTypingEffect(); // Disabled to prevent HTML tag display issues
     initParticleBackground();
+    initVisitorTracking();
+    initVisitorCounter();
     
     console.log('Portfolio JavaScript initialization complete');
 });
@@ -284,6 +286,21 @@ function initContactForm() {
             });
             
             if (isValid) {
+                // Store visitor information for future tracking
+                try {
+                    const nameField = contactForm.querySelector('[name="name"]');
+                    const emailField = contactForm.querySelector('[name="email"]');
+                    
+                    if (nameField && nameField.value.trim()) {
+                        localStorage.setItem('visitorName', nameField.value.trim());
+                    }
+                    if (emailField && emailField.value.trim()) {
+                        localStorage.setItem('visitorEmail', emailField.value.trim());
+                    }
+                } catch (error) {
+                    console.log('Could not store visitor information');
+                }
+                
                 // Show loading state
                 const submitBtn = contactForm.querySelector('button[type="submit"]');
                 const originalText = submitBtn.innerHTML;
@@ -297,13 +314,13 @@ function initContactForm() {
                     // GitHub Pages - use mailto fallback
                     const subject = encodeURIComponent(`Portfolio Contact: ${formData.subject}`);
                     const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
-                    const mailtoLink = `mailto:arpitselat@gmail.com?subject=${subject}&body=${body}`;
+                    const mailtoLink = `mailto:selatarpit@gmail.com?subject=${subject}&body=${body}`;
                     
                     // Open mailto link
                     window.location.href = mailtoLink;
                     
                     // Show success message
-                    showNotification('Your email client will open to send the message. If it doesn\'t open automatically, please email me directly at arpitselat@gmail.com', 'success');
+                    showNotification('Your email client will open to send the message. If it doesn\'t open automatically, please email me directly at selatarpit@gmail.com', 'success');
                     contactForm.reset();
                     
                     // Restore button state
@@ -540,3 +557,174 @@ const throttledScrollHandler = throttle(function() {
 }, 100);
 
 window.addEventListener('scroll', throttledScrollHandler);
+
+// Visitor tracking functionality
+async function initVisitorTracking() {
+    try {
+        // Get visitor information
+        const visitorInfo = await getVisitorInfo();
+        
+        // Send visitor data to server (only for local server)
+        const isGitHubPages = window.location.hostname.includes('github.io');
+        
+        if (!isGitHubPages) {
+            // Local server - send visitor notification
+            await sendVisitorNotification(visitorInfo);
+        } else {
+            // GitHub Pages - log visitor info (optional)
+            console.log('Visitor tracked:', visitorInfo);
+        }
+        
+    } catch (error) {
+        console.log('Visitor tracking error:', error);
+    }
+}
+
+// Get visitor information
+async function getVisitorInfo() {
+    const visitorData = {
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        platform: navigator.platform,
+        screen: {
+            width: screen.width,
+            height: screen.height,
+            colorDepth: screen.colorDepth
+        },
+        viewport: {
+            width: window.innerWidth,
+            height: window.innerHeight
+        },
+        referrer: document.referrer || 'Direct visit',
+        url: window.location.href,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        cookiesEnabled: navigator.cookieEnabled,
+        onlineStatus: navigator.onLine
+    };
+
+    // Try to get stored visitor information from previous form submissions
+    try {
+        const storedVisitorName = localStorage.getItem('visitorName');
+        const storedVisitorEmail = localStorage.getItem('visitorEmail');
+        
+        if (storedVisitorName) {
+            visitorData.visitorName = storedVisitorName;
+        }
+        if (storedVisitorEmail) {
+            visitorData.visitorEmail = storedVisitorEmail;
+        }
+    } catch (error) {
+        console.log('Could not access localStorage');
+    }
+
+    // Try to get location info (optional)
+    try {
+        const locationResponse = await fetch('https://ipapi.co/json/');
+        const locationData = await locationResponse.json();
+        
+        visitorData.location = {
+            ip: locationData.ip,
+            city: locationData.city,
+            region: locationData.region,
+            country: locationData.country_name,
+            countryCode: locationData.country_code,
+            timezone: locationData.timezone,
+            isp: locationData.org
+        };
+    } catch (error) {
+        console.log('Could not get location data:', error);
+        visitorData.location = {
+            ip: 'Unknown',
+            city: 'Unknown',
+            country: 'Unknown'
+        };
+    }
+
+    return visitorData;
+}
+
+// Send visitor notification to server
+async function sendVisitorNotification(visitorInfo) {
+    try {
+        const response = await fetch('/track-visitor', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(visitorInfo)
+        });
+        
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Visitor tracked successfully');
+            
+            // Update visitor counter with new count
+            if (result.totalVisitors) {
+                updateVisitorCounter(result.totalVisitors);
+            }
+        }
+    } catch (error) {
+        console.log('Failed to track visitor:', error);
+    }
+}
+
+// Initialize and update visitor counter
+async function initVisitorCounter() {
+    try {
+        const isGitHubPages = window.location.hostname.includes('github.io');
+        
+        if (!isGitHubPages) {
+            // Get visitor count from server
+            const response = await fetch('/visitor-count');
+            const data = await response.json();
+            
+            if (data.success) {
+                updateVisitorCounter(data.count);
+            }
+        } else {
+            // For GitHub Pages, show a placeholder or hide the counter
+            const visitorElement = document.getElementById('visitor-count');
+            if (visitorElement) {
+                visitorElement.textContent = '🌐';
+                visitorElement.nextElementSibling.textContent = 'Online Portfolio';
+            }
+        }
+    } catch (error) {
+        console.log('Failed to load visitor count:', error);
+    }
+}
+
+// Update visitor counter with animation
+function updateVisitorCounter(count) {
+    const visitorElement = document.getElementById('visitor-count');
+    if (visitorElement) {
+        // Animate the counter
+        const startCount = parseInt(visitorElement.textContent) || 0;
+        const endCount = parseInt(count);
+        
+        if (startCount !== endCount) {
+            animateCounterValue(visitorElement, startCount, endCount, 1000);
+        }
+    }
+}
+
+// Animate counter value
+function animateCounterValue(element, start, end, duration) {
+    const startTime = performance.now();
+    const difference = end - start;
+    
+    function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        const currentValue = Math.floor(start + (difference * progress));
+        element.textContent = currentValue.toLocaleString();
+        
+        if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+        }
+    }
+    
+    requestAnimationFrame(updateCounter);
+}
