@@ -290,32 +290,53 @@ function initContactForm() {
                 submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i>Sending...';
                 submitBtn.disabled = true;
                 
-                // Send email
-                fetch('/send-email', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/x-www-form-urlencoded',
-                    },
-                    body: new URLSearchParams(formData)
-                })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.success) {
-                        showNotification(data.message, 'success');
-                        contactForm.reset();
-                    } else {
-                        showNotification(data.message, 'error');
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    showNotification('Failed to send message. Please try again or contact directly at arpitselat@gmail.com', 'error');
-                })
-                .finally(() => {
+                // Check if we're on GitHub Pages or local server
+                const isGitHubPages = window.location.hostname.includes('github.io');
+                
+                if (isGitHubPages) {
+                    // GitHub Pages - use mailto fallback
+                    const subject = encodeURIComponent(`Portfolio Contact: ${formData.subject}`);
+                    const body = encodeURIComponent(`Name: ${formData.name}\nEmail: ${formData.email}\n\nMessage:\n${formData.message}`);
+                    const mailtoLink = `mailto:arpitselat@gmail.com?subject=${subject}&body=${body}`;
+                    
+                    // Open mailto link
+                    window.location.href = mailtoLink;
+                    
+                    // Show success message
+                    showNotification('Your email client will open to send the message. If it doesn\'t open automatically, please email me directly at arpitselat@gmail.com', 'success');
+                    contactForm.reset();
+                    
                     // Restore button state
                     submitBtn.innerHTML = originalText;
                     submitBtn.disabled = false;
-                });
+                } else {
+                    // Local server - use API endpoint
+                    fetch('/send-email', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/x-www-form-urlencoded',
+                        },
+                        body: new URLSearchParams(formData)
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            showNotification(data.message, 'success');
+                            contactForm.reset();
+                        } else {
+                            showNotification(data.message, 'error');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        showNotification('Failed to send message. Please try again or contact directly at arpitselat@gmail.com', 'error');
+                    })
+                    .finally(() => {
+                        // Restore button state
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    });
+                }
             } else {
                 showNotification('Please fill in all required fields.', 'error');
             }
