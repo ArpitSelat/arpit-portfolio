@@ -11,15 +11,15 @@ const port = process.env.PORT || 3000;
 const emailConfig = {
   service: 'gmail',
   auth: {
-    user: 'selatarpit@gmail.com', // Your Gmail address
-    pass: 'ozsc vorq kbwp gpbw'     // Generate this from Google Account Settings
+    user: 'arpitselat@gmail.com', // Your Gmail address
+    pass: 'hngu ttwk ftre zrzt'     // Generate this from Google Account Settings
   }
 };
 
 // Create nodemailer transporter
 let transporter = null;
 try {
-  transporter = nodemailer.createTransporter(emailConfig);
+  transporter = nodemailer.createTransport(emailConfig);
   console.log('✅ Email transporter configured successfully');
   
   // Test email connection
@@ -78,7 +78,7 @@ const server = http.createServer((req, res) => {
         // Email options
         const mailOptions = {
           from: formData.email,
-          to: 'selatarpit@gmail.com',
+          to: 'arpitselat@gmail.com',
           subject: `Portfolio Contact: ${formData.subject}`,
           html: `
             <h3>New message from your portfolio website</h3>
