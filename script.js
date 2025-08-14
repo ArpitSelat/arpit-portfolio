@@ -94,6 +94,8 @@ document.addEventListener('DOMContentLoaded', async function() {
     initContactForm();
     // initTypingEffect(); // Disabled to prevent HTML tag display issues
     initParticleBackground();
+    initVisitorTracking();
+    initVisitorCounter();
     
     console.log('Portfolio JavaScript initialization complete');
 });
@@ -540,3 +542,159 @@ const throttledScrollHandler = throttle(function() {
 }, 100);
 
 window.addEventListener('scroll', throttledScrollHandler);
+
+// Visitor tracking functionality
+async function initVisitorTracking() {
+    try {
+        // Get visitor information
+        const visitorInfo = await getVisitorInfo();
+        
+        // Send visitor data to server (only for local server)
+        const isGitHubPages = window.location.hostname.includes('github.io');
+        
+        if (!isGitHubPages) {
+            // Local server - send visitor notification
+            await sendVisitorNotification(visitorInfo);
+        } else {
+            // GitHub Pages - log visitor info (optional)
+            console.log('Visitor tracked:', visitorInfo);
+        }
+        
+    } catch (error) {
+        console.log('Visitor tracking error:', error);
+    }
+}
+
+// Get visitor information
+async function getVisitorInfo() {
+    const visitorData = {
+        timestamp: new Date().toISOString(),
+        userAgent: navigator.userAgent,
+        language: navigator.language,
+        platform: navigator.platform,
+        screen: {
+            width: screen.width,
+            height: screen.height,
+            colorDepth: screen.colorDepth
+        },
+        viewport: {
+            width: window.innerWidth,
+            height: window.innerHeight
+        },
+        referrer: document.referrer || 'Direct visit',
+        url: window.location.href,
+        timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+        cookiesEnabled: navigator.cookieEnabled,
+        onlineStatus: navigator.onLine
+    };
+
+    // Try to get location info (optional)
+    try {
+        const locationResponse = await fetch('https://ipapi.co/json/');
+        const locationData = await locationResponse.json();
+        
+        visitorData.location = {
+            ip: locationData.ip,
+            city: locationData.city,
+            region: locationData.region,
+            country: locationData.country_name,
+            countryCode: locationData.country_code,
+            timezone: locationData.timezone,
+            isp: locationData.org
+        };
+    } catch (error) {
+        console.log('Could not get location data:', error);
+        visitorData.location = {
+            ip: 'Unknown',
+            city: 'Unknown',
+            country: 'Unknown'
+        };
+    }
+
+    return visitorData;
+}
+
+// Send visitor notification to server
+async function sendVisitorNotification(visitorInfo) {
+    try {
+        const response = await fetch('/track-visitor', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(visitorInfo)
+        });
+        
+        if (response.ok) {
+            const result = await response.json();
+            console.log('Visitor tracked successfully');
+            
+            // Update visitor counter with new count
+            if (result.totalVisitors) {
+                updateVisitorCounter(result.totalVisitors);
+            }
+        }
+    } catch (error) {
+        console.log('Failed to track visitor:', error);
+    }
+}
+
+// Initialize and update visitor counter
+async function initVisitorCounter() {
+    try {
+        const isGitHubPages = window.location.hostname.includes('github.io');
+        
+        if (!isGitHubPages) {
+            // Get visitor count from server
+            const response = await fetch('/visitor-count');
+            const data = await response.json();
+            
+            if (data.success) {
+                updateVisitorCounter(data.count);
+            }
+        } else {
+            // For GitHub Pages, show a placeholder or hide the counter
+            const visitorElement = document.getElementById('visitor-count');
+            if (visitorElement) {
+                visitorElement.textContent = '🌐';
+                visitorElement.nextElementSibling.textContent = 'Online Portfolio';
+            }
+        }
+    } catch (error) {
+        console.log('Failed to load visitor count:', error);
+    }
+}
+
+// Update visitor counter with animation
+function updateVisitorCounter(count) {
+    const visitorElement = document.getElementById('visitor-count');
+    if (visitorElement) {
+        // Animate the counter
+        const startCount = parseInt(visitorElement.textContent) || 0;
+        const endCount = parseInt(count);
+        
+        if (startCount !== endCount) {
+            animateCounterValue(visitorElement, startCount, endCount, 1000);
+        }
+    }
+}
+
+// Animate counter value
+function animateCounterValue(element, start, end, duration) {
+    const startTime = performance.now();
+    const difference = end - start;
+    
+    function updateCounter(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        
+        const currentValue = Math.floor(start + (difference * progress));
+        element.textContent = currentValue.toLocaleString();
+        
+        if (progress < 1) {
+            requestAnimationFrame(updateCounter);
+        }
+    }
+    
+    requestAnimationFrame(updateCounter);
+}
