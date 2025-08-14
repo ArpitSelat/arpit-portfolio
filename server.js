@@ -12,7 +12,7 @@ const emailConfig = {
   service: 'gmail',
   auth: {
     user: 'arpitselat@gmail.com', // Your Gmail address
-    pass: 'your-app-password'     // Generate this from Google Account Settings
+    pass: 'hngu ttwk ftre zrzt'     // Generate this from Google Account Settings
   }
 };
 
