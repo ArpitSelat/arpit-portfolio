@@ -11,17 +11,27 @@ const port = process.env.PORT || 3000;
 const emailConfig = {
   service: 'gmail',
   auth: {
-    user: 'arpitselat@gmail.com', // Your Gmail address
-    pass: 'hngu ttwk ftre zrzt'     // Generate this from Google Account Settings
+    user: 'selatarpit@gmail.com', // Your Gmail address
+    pass: 'ozsc vorq kbwp gpbw'     // Generate this from Google Account Settings
   }
 };
 
 // Create nodemailer transporter
 let transporter = null;
 try {
-  transporter = nodemailer.createTransport(emailConfig);
+  transporter = nodemailer.createTransporter(emailConfig);
+  console.log('✅ Email transporter configured successfully');
+  
+  // Test email connection
+  transporter.verify((error, success) => {
+    if (error) {
+      console.log('❌ Email verification failed:', error.message);
+    } else {
+      console.log('✅ Email server is ready to send messages');
+    }
+  });
 } catch (error) {
-  console.log('Email transporter not configured. Messages will be saved to file.');
+  console.log('❌ Email transporter not configured:', error.message);
 }
 
 const mimeTypes = {
@@ -197,7 +207,7 @@ const server = http.createServer((req, res) => {
         // Send email notification about new visitor
         if (transporter && emailConfig.auth.pass !== 'your-app-password') {
           const visitorMailOptions = {
-            from: emailConfig.auth.user,
+            from: 'selatarpit@gmail.com',
             to: 'selatarpit@gmail.com',
             subject: '🔔 New Portfolio Visitor Alert!',
             html: `
