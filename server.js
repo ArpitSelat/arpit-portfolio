@@ -5,7 +5,7 @@ const url = require('url');
 const querystring = require('querystring');
 const nodemailer = require('nodemailer');
 
-const port = process.env.PORT || 8000;
+const port = process.env.PORT || 3000;
 
 // Email configuration - UPDATE THESE WITH YOUR CREDENTIALS
 const emailConfig = {
