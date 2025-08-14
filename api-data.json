@@ -2,7 +2,7 @@
   "personalInfo": {
     "name": "Arpit Kumar Selat",
     "title": "Junior Software Engineer",
-    "location": "Indore, Madhya Pradesh, India",
+    "location": "Indore, India",
     "email": "arpitselat@gmail.com",
     "phone": "+91 7999564548",
     "experience": "3.1",
@@ -13,11 +13,11 @@
     "sectionSubtitle": "Passionate about creating innovative solutions",
     "professionalSummary": {
       "title": "Professional Summary",
-      "paragraph1": "Junior Software Engineer with over 3.5 years of experience building scalable and performance-driven web applications using ASP.NET MVC, .NET Core, .NET 8, and SQL Server. Proficient in API integration, clean UI development, performance optimization, and Microsoft Teams integration. Currently working at Cognizant leading the development of Manager Hub platform.",
+      "paragraph1": "Junior Software Engineer with over 3+ years of experience building scalable and performance-driven web applications using ASP.NET MVC, .NET Core, .NET 8, and SQL Server. Proficient in API integration, clean UI development, performance optimization, and Microsoft Teams integration. Currently working at Cognizant leading the development of Manager Hub platform.",
       "paragraph2": "Hands-on experience with Microsoft Teams integration, Razor Pages, and Azure DevOps pipelines. Currently leading the development of the Manager Hub platform at Cognizant, delivering robust, secure, and maintainable enterprise solutions."
     },
     "contactDetails": {
-      "location": "Indore, Madhya Pradesh, India",
+      "location": "Indore, India",
       "experience": "3.1 Years",
       "email": "arpitselat@gmail.com",
       "phone": "+91 7999564548"

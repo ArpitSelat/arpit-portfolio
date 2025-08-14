@@ -36,19 +36,7 @@ class PortfolioDataLoader {
         try {
             const personalInfo = await this.api.getPersonalInfo();
             
-            // Update about section experience
-            const infoItems = document.querySelectorAll('.info-item');
-            infoItems.forEach(item => {
-                const strongElement = item.querySelector('strong');
-                if (strongElement && strongElement.textContent.includes('Experience:')) {
-                    const textNode = strongElement.nextSibling;
-                    if (textNode) {
-                        textNode.textContent = ` ${personalInfo.experience} Years`;
-                    }
-                }
-            });
-
-            // Update professional summary
+            // Update professional summary only
             const aboutContent = document.querySelector('.about-content');
             if (aboutContent) {
                 const summaryParagraph = aboutContent.querySelector('p');
@@ -94,16 +82,29 @@ class PortfolioDataLoader {
                 const strongElement = item.querySelector('strong');
                 if (strongElement) {
                     const label = strongElement.textContent;
-                    const textNode = strongElement.nextSibling;
                     
-                    if (label.includes('Location:') && textNode) {
-                        textNode.textContent = ` ${aboutData.contactDetails.location}`;
-                    } else if (label.includes('Experience:') && textNode) {
-                        textNode.textContent = ` ${aboutData.contactDetails.experience}`;
-                    } else if (label.includes('Email:') && textNode) {
-                        textNode.textContent = ` ${aboutData.contactDetails.email}`;
-                    } else if (label.includes('Phone:') && textNode) {
-                        textNode.textContent = ` ${aboutData.contactDetails.phone}`;
+                    if (label.includes('Location:')) {
+                        const spanElement = strongElement.nextElementSibling;
+                        if (spanElement && spanElement.tagName === 'SPAN') {
+                            spanElement.textContent = aboutData.contactDetails.location;
+                        }
+                    } else if (label.includes('Experience:')) {
+                        const spanElement = strongElement.nextElementSibling;
+                        if (spanElement && spanElement.tagName === 'SPAN') {
+                            spanElement.textContent = aboutData.contactDetails.experience;
+                        }
+                    } else if (label.includes('Email:')) {
+                        const linkElement = strongElement.nextElementSibling;
+                        if (linkElement && linkElement.tagName === 'A') {
+                            linkElement.textContent = aboutData.contactDetails.email;
+                            linkElement.href = `mailto:${aboutData.contactDetails.email}`;
+                        }
+                    } else if (label.includes('Phone:')) {
+                        const linkElement = strongElement.nextElementSibling;
+                        if (linkElement && linkElement.tagName === 'A') {
+                            linkElement.textContent = aboutData.contactDetails.phone;
+                            linkElement.href = `tel:${aboutData.contactDetails.phone.replace(/\s+/g, '')}`;
+                        }
                     }
                 }
             });
